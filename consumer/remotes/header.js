@@ -1,12 +1,12 @@
 module.exports = {
   name: "header",
   get randomString() {
-    const date = String(new Date().getMinutes());
-    let randomString = "";
-    for (let i = 0; i < date.length; i += 2) {
-      randomString += Number(date.substr(i, 2)).toString(36);
-    }
-    return randomString;
+    const date = new Date();
+
+    const stringDate = String(
+      new Date().setHours(date.getHours(), date.getMinutes(), 0, 0)
+    );
+    return stringDate;
   },
   get url() {
     return `${process.env.REACT_APP_MF_HEADER}/remoteEntry.js?${this.randomString}`;
